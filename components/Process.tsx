@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef } from "react"
 import { Search, Lightbulb, Code, Rocket } from "lucide-react"
+import Image from "next/image"
 
 const steps = [
   {
@@ -13,6 +14,7 @@ const steps = [
     description:
       "We analyze your current digital presence, identify opportunities, and understand your target audience and business goals.",
     details: ["Digital Audit", "Competitor Analysis", "Target Audience Research", "Goal Setting"],
+    image: "/images/analytics-woman.png",
   },
   {
     number: "02",
@@ -20,6 +22,7 @@ const steps = [
     title: "Strategy Development",
     description: "Based on our findings, we create a comprehensive digital marketing strategy tailored to your needs.",
     details: ["Marketing Strategy", "Content Planning", "Campaign Design", "Timeline Creation"],
+    image: "/images/business-growth.png",
   },
   {
     number: "03",
@@ -28,6 +31,7 @@ const steps = [
     description:
       "Our team implements the strategy across all channels including ads setup, SEO optimization, and content creation.",
     details: ["Ads Setup", "SEO Implementation", "Content Creation", "Social Media Setup"],
+    image: "/images/ui-development.png",
   },
   {
     number: "04",
@@ -36,6 +40,7 @@ const steps = [
     description:
       "We continuously monitor performance, provide detailed reports, and optimize campaigns for maximum ROI.",
     details: ["Performance Monitoring", "Regular Reporting", "Campaign Optimization", "Strategy Refinement"],
+    image: "/images/analytics-dashboard.png",
   },
 ]
 
@@ -44,7 +49,7 @@ export default function Process() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section ref={ref} className="py-20 bg-white relative overflow-hidden">
+    <section ref={ref} className="py-20 bg-gradient-to-br from-[#FAF5F1] to-white relative overflow-hidden">
       {/* Background Animation */}
       <div className="absolute inset-0">
         <motion.div
@@ -85,32 +90,35 @@ export default function Process() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="space-y-20">
           {steps.map((step, index) => (
             <motion.div
               key={step.number}
-              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+              initial={{ opacity: 0, y: 50 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
               transition={{ duration: 0.8, delay: index * 0.2 }}
-              className={`flex ${index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} items-center gap-8`}
+              className={`flex flex-col ${index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} items-center gap-12`}
             >
               {/* Step Content */}
-              <div className="flex-1">
+              <div className="flex-1 max-w-2xl">
                 <motion.div
                   whileHover={{ scale: 1.02 }}
-                  className="bg-[#FAF5F1] p-8 rounded-2xl border border-[#C38E70]/10 hover:shadow-lg transition-all duration-300"
+                  className="bg-white p-8 rounded-3xl border border-[#C38E70]/10 hover:shadow-xl transition-all duration-300 relative overflow-hidden"
                 >
-                  <div className="flex items-center mb-6">
+                  {/* Background Number */}
+                  <div className="absolute top-4 right-4 text-8xl font-bold text-[#C38E70]/5">{step.number}</div>
+
+                  <div className="flex items-center mb-6 relative z-10">
                     <span className="text-4xl font-bold text-[#C38E70]/30 mr-4">{step.number}</span>
                     <div className="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center">
                       <step.icon className="w-6 h-6 text-white" />
                     </div>
                   </div>
 
-                  <h3 className="text-2xl font-bold text-[#2E2E2E] mb-4">{step.title}</h3>
-                  <p className="text-[#2E2E2E]/70 mb-6 leading-relaxed">{step.description}</p>
+                  <h3 className="text-2xl font-bold text-[#2E2E2E] mb-4 relative z-10">{step.title}</h3>
+                  <p className="text-[#2E2E2E]/70 mb-6 leading-relaxed relative z-10">{step.description}</p>
 
-                  <ul className="space-y-2">
+                  <ul className="space-y-2 relative z-10">
                     {step.details.map((detail, detailIndex) => (
                       <motion.li
                         key={detailIndex}
@@ -129,10 +137,40 @@ export default function Process() {
 
               {/* Step Visual */}
               <motion.div
-                whileHover={{ scale: 1.05, rotate: 5 }}
-                className="w-32 h-32 gradient-bg rounded-2xl flex items-center justify-center shadow-lg"
+                animate={{
+                  y: [0, -15, 0],
+                  rotate: [0, 2, 0],
+                }}
+                transition={{
+                  duration: 4 + index,
+                  repeat: Number.POSITIVE_INFINITY,
+                  ease: "easeInOut",
+                  delay: index * 0.5,
+                }}
+                className="relative"
               >
-                <step.icon className="w-16 h-16 text-white" />
+                <Image
+                  src={step.image || "/placeholder.svg"}
+                  alt={step.title}
+                  width={400}
+                  height={400}
+                  className="w-80 h-80 object-contain drop-shadow-2xl"
+                />
+
+                {/* Floating Elements */}
+                <motion.div
+                  animate={{
+                    scale: [1, 1.2, 1],
+                    opacity: [0.3, 0.6, 0.3],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Number.POSITIVE_INFINITY,
+                    ease: "easeInOut",
+                    delay: index * 0.5,
+                  }}
+                  className="absolute -top-5 -right-5 w-16 h-16 bg-[#C38E70]/20 rounded-full blur-xl"
+                />
               </motion.div>
             </motion.div>
           ))}

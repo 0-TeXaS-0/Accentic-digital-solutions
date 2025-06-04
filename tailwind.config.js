@@ -41,28 +41,27 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        cream: "#FAF5F1",
-        bronze: "#C38E70",
-        softGreen: "#37695F",
-        darkText: "#2E2E2E",
+        // Updated color palette inspired by the AI tech illustration
+        cream: "#f8fafc",
+        indigo: "#6366f1",
+        purple: "#8b5cf6",
+        blue: "#3b82f6",
+        cyan: "#06b6d4",
+        darkBlue: "#1e293b",
+        lightBlue: "#e0f2fe",
+        softPurple: "#f3f4f6",
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],
-      },
-      animation: {
-        float: "float 6s ease-in-out infinite",
-        pulse: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-      },
-      keyframes: {
-        float: {
-          "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-20px)" },
-        },
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
     },
   },

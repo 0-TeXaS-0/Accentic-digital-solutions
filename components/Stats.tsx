@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef, useState, useEffect } from "react"
+import Image from "next/image"
 
 const stats = [
   {
@@ -53,66 +54,67 @@ export default function Stats() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section ref={ref} className="py-20 bg-[#2E2E2E] relative overflow-hidden">
-      {/* Background Animation */}
+    <section ref={ref} className="py-20 bg-gradient-to-br from-darkBlue to-indigo relative overflow-hidden">
+      {/* Background Elements */}
       <div className="absolute inset-0">
-        <motion.div
-          animate={{
-            x: [0, 100, 0],
-            y: [0, -50, 0],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "easeInOut",
-          }}
-          className="absolute top-0 left-0 w-96 h-96 bg-[#C38E70]/10 rounded-full blur-3xl"
-        />
-        <motion.div
-          animate={{
-            x: [0, -100, 0],
-            y: [0, 50, 0],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "easeInOut",
-          }}
-          className="absolute bottom-0 right-0 w-96 h-96 bg-[#37695F]/10 rounded-full blur-3xl"
-        />
+        <div className="absolute top-0 left-0 w-96 h-96 bg-purple/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-cyan/10 rounded-full blur-3xl"></div>
       </div>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Proven Track Record of
-            <span className="text-gradient block">Success</span>
-          </h2>
-          <p className="text-xl text-white/70 max-w-3xl mx-auto">
-            Numbers that speak for themselves. Our commitment to excellence is reflected in every project we deliver.
-          </p>
-        </motion.div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          {/* Content Side */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Proven Track Record of
+              <span className="text-gradient block">Success</span>
+            </h2>
+            <p className="text-xl text-white/70 mb-12 leading-relaxed">
+              Numbers that speak for themselves. Our commitment to excellence is reflected in every project we deliver.
+            </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {stats.map((stat, index) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 50 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="text-center bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/10 hover:border-[#C38E70]/30 transition-all duration-300"
-            >
-              <AnimatedNumber number={stat.number} suffix={stat.suffix} isInView={isInView} />
-              <h3 className="text-xl font-semibold text-white mt-4 mb-2">{stat.label}</h3>
-              <p className="text-white/60 text-sm leading-relaxed">{stat.description}</p>
-            </motion.div>
-          ))}
+            <div className="grid grid-cols-2 gap-8">
+              {stats.map((stat, index) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="text-center glass-effect-dark p-6 rounded-2xl border border-white/10 hover:border-indigo/30 transition-all duration-300 card-glow"
+                >
+                  <AnimatedNumber number={stat.number} suffix={stat.suffix} isInView={isInView} />
+                  <h3 className="text-lg font-semibold text-white mt-3 mb-2">{stat.label}</h3>
+                  <p className="text-white/60 text-sm leading-relaxed">{stat.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Image Side */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="relative flex justify-center"
+          >
+            <div className="relative">
+              <Image
+                src="/images/business-growth.png"
+                alt="Business Growth Analytics"
+                width={500}
+                height={500}
+                className="w-full max-w-lg h-auto drop-shadow-2xl"
+              />
+              {/* Static Glow Effects */}
+              <div className="absolute -top-8 -right-8 w-20 h-20 bg-purple/30 rounded-full blur-xl"></div>
+              <div className="absolute -bottom-6 -left-6 w-16 h-16 bg-cyan/30 rounded-full blur-xl"></div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
