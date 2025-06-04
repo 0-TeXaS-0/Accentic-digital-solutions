@@ -46,12 +46,62 @@ function FloatingPaths({ position }: { position: number }) {
   )
 }
 
+// Enhanced gradient background component inspired by Apple's aesthetic
+function AnimatedGradientBackground() {
+  return (
+    <div className="absolute inset-0 -z-10 overflow-hidden">
+      {/* Noise texture overlay for grain effect */}
+      <div className="absolute inset-0 bg-noise opacity-[0.03] mix-blend-overlay z-10"></div>
+      
+      <div className="relative w-full h-full">
+        {/* Large primary gradient sphere - Positioned to avoid text clipping */}
+        <div
+          className="absolute top-[45%] -left-20 w-[40rem] h-[40rem] bg-gradient-to-br from-indigo/40 to-purple/30 
+                     rounded-full filter blur-3xl opacity-50 animate-blob-slow"
+        />
+
+        {/* Secondary gradient sphere with different color - Moved higher */}
+        <div
+          className="absolute -top-20 right-0 w-[35rem] h-[35rem] bg-gradient-to-bl from-cyan/30 to-blue/20 
+                     rounded-full filter blur-3xl opacity-40 animate-blob-slow animation-delay-2000"
+        />
+
+        {/* Accent color sphere - Pushed further down */}
+        <div
+          className="absolute -bottom-40 left-1/3 w-[45rem] h-[45rem] bg-gradient-to-tr from-indigo/20 to-purple/30 
+                     rounded-full filter blur-3xl opacity-30 animate-blob-slow animation-delay-4000"
+        />
+
+        {/* Additional smaller blobs to fill space without interfering with text */}
+        <div
+          className="absolute top-[20%] right-[30%] w-48 h-48 bg-blue/20 rounded-full 
+                     filter blur-xl opacity-30 animate-float animation-delay-3000"
+        />
+        
+        <div
+          className="absolute bottom-[40%] left-[20%] w-40 h-40 bg-purple/20 rounded-full 
+                     filter blur-xl opacity-30 animate-float animation-delay-5000"
+        />
+        
+        {/* Clear space for title text by adding a subtle gradient that lightens that area */}
+        <div className="absolute top-0 left-0 right-0 h-[40%] bg-gradient-to-b from-cream/60 to-transparent"></div>
+        
+        {/* Ensure the bottom text area is clear */}
+        <div className="absolute bottom-0 left-0 right-0 h-[25%] bg-gradient-to-t from-cream/50 to-transparent"></div>
+      </div>
+    </div>
+  );
+}
+
 export default function Hero() {
   const title = "Accentic Digital Solutions"
   const words = title.split(" ")
 
   return (
     <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-gradient-to-br from-cream via-lightBlue/30 to-indigo/10">
+      {/* Animated Gradient Background */}
+      <AnimatedGradientBackground />
+
       {/* Animated Background Paths */}
       <div className="absolute inset-0 opacity-20">
         <FloatingPaths position={1} />
