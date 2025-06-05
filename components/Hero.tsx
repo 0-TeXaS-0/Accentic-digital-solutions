@@ -121,36 +121,38 @@ export default function Hero() {
             className="text-center lg:text-left"
           >
             {/* Main Title */}
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight leading-[1.2] pb-4 overflow-visible">
-              {words.map((word, wordIndex) => (
-                <span key={wordIndex} className="inline-block mr-3 last:mr-0 pb-2 overflow-visible">
-                  {word.split("").map((letter, letterIndex) => (
-                    <motion.span
-                      key={`${wordIndex}-${letterIndex}`}
-                      initial={{ y: 100, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{
-                        delay: wordIndex * 0.1 + letterIndex * 0.03,
-                        type: "spring",
-                        stiffness: 150,
-                        damping: 25,
-                      }}
-                      className="inline-block text-gradient overflow-visible"
-                      style={{ paddingBottom: '0.25rem' }}
-                    >
-                      {letter}
-                    </motion.span>
-                  ))}
-                </span>
-              ))}
-            </h1>
+            <div className="mb-8 pb-4">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] overflow-visible">
+                {words.map((word, wordIndex) => (
+                  <span key={wordIndex} className="inline-block mr-3 last:mr-0 mb-2 overflow-visible">
+                    {word.split("").map((letter, letterIndex) => (
+                      <motion.span
+                        key={`${wordIndex}-${letterIndex}`}
+                        initial={{ y: 100, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{
+                          delay: wordIndex * 0.1 + letterIndex * 0.03,
+                          type: "spring",
+                          stiffness: 150,
+                          damping: 25,
+                        }}
+                        className="inline-block text-gradient overflow-visible"
+                        style={{ lineHeight: '1.2', paddingBottom: '0.25rem' }}
+                      >
+                        {letter}
+                      </motion.span>
+                    ))}
+                  </span>
+                ))}
+              </h1>
+            </div>
 
             {/* Tagline */}
             <motion.p
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.5, duration: 0.8 }}
-              className="text-xl sm:text-2xl md:text-3xl text-blue mb-6 font-light"
+              className="text-xl sm:text-2xl md:text-3xl text-blue mb-6 font-light leading-relaxed"
             >
               "Fueling Growth with Creativity"
             </motion.p>

@@ -29,7 +29,7 @@
   .text-6xl,
   .text-7xl {
     line-height: 1.1;
-    padding-bottom: 0.125rem;
+    padding-bottom: 0.25rem;
   }
 }
 
@@ -44,7 +44,8 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
     display: inline-block;
-    padding-bottom: 0.125rem;
+    padding-bottom: 0.25rem;
+    line-height: 1.2;
     overflow: visible;
   }
 
